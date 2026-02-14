@@ -1,19 +1,19 @@
 "use client";
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
+import { TiltCard } from "@/components/shared/TiltCard";
+import { AnimatedCosmos } from "@/components/shared/AnimatedCosmos";
 import {
   Play,
   Flower2,
   Mic,
-  BookOpen,
   ArrowRight,
   Clock,
   Sparkles,
   ChevronRight,
   TrendingUp,
   Layout,
-  Zap,
   Flame,
   ArrowUpRight,
   PenTool,
@@ -83,149 +83,8 @@ const GREETINGS = [
   { en: "Legendary progress", kn: "ಪೌರಾಣಿಕ ಪ್ರಗತಿ", hi: "शानदार प्रगति" },
 ];
 
-function getGreetingByTime(): { en: string; hi: string; kn: string } {
-  const hour = new Date().getHours();
-  if (hour < 12) return { en: "Good Morning", hi: "सुप्रभात", kn: "ಶುಭೋದಯ" };
-  if (hour < 17)
-    return { en: "Good Afternoon", hi: "नमस्ते", kn: "ಶುಭ ಮಧ್ಯಾಹ್ನ" };
-  return { en: "Good Evening", hi: "शुभ संध्या", kn: "ಶುಭ ಸಂಜೆ" };
-}
-
 // --- DETERMINISTIC COSMOS ELEMENTS ---
-const GLYPHS = [
-  "ಅ",
-  "ಆ",
-  "ಕ",
-  "ಖ",
-  "ಗ",
-  "ಘ",
-  "ಚ",
-  "ಛ",
-  "ज",
-  "झ",
-  "ञ",
-  "ट",
-  "ಕ",
-];
-
-const CosmosBackground = () => {
-  // Use state to avoid hydration mismatch
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  const elements = useMemo(() => {
-    return [...Array(12)].map((_, i) => ({
-      glyph: GLYPHS[i % GLYPHS.length],
-      top: `${(i * 17) % 100}%`,
-      left: `${(i * 13) % 100}%`,
-      size: 10 + (i % 3) * 10,
-      duration: 15 + (i % 5) * 5,
-      delay: i * -2,
-    }));
-  }, []);
-
-  if (!mounted) return null;
-
-  return (
-    <div className='fixed inset-0 -z-10 overflow-hidden pointer-events-none'>
-      <div className='absolute inset-0 bg-[#FDFDFD]' />
-
-      {/* Animated Mesh Gradients */}
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          x: [0, 30, 0],
-          y: [0, -20, 0],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className='absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-terracotta/[0.03] blur-[120px] rounded-full'
-      />
-      <motion.div
-        animate={{
-          scale: [1, 1.5, 1],
-          x: [0, -40, 0],
-          y: [0, 30, 0],
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className='absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-gold/[0.04] blur-[140px] rounded-full'
-      />
-
-      {/* Floating Glyphs */}
-      {elements.map((el, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: [0.05, 0.15, 0.05],
-            y: [0, -40, 0],
-            rotate: [0, 10, -10, 0],
-          }}
-          transition={{
-            duration: el.duration,
-            repeat: Infinity,
-            delay: el.delay,
-            ease: "easeInOut",
-          }}
-          className='absolute font-kannada text-indigo/5 select-none'
-          style={{
-            top: el.top,
-            left: el.left,
-            fontSize: `${el.size}px`,
-          }}
-        >
-          {el.glyph}
-        </motion.div>
-      ))}
-
-      <div className="absolute inset-0 opacity-[0.02] mix-blend-multiply bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-    </div>
-  );
-};
-
-// --- 3D TILT CARD COMPONENT ---
-const TiltCard = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(y, [-100, 100], [10, -10]), {
-    stiffness: 300,
-    damping: 30,
-  });
-  const rotateY = useSpring(useTransform(x, [-100, 100], [-10, 10]), {
-    stiffness: 300,
-    damping: 30,
-  });
-
-  function handleMouseMove(event: React.MouseEvent<HTMLDivElement>) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    x.set(event.clientX - centerX);
-    y.set(event.clientY - centerY);
-  }
-
-  function handleMouseLeave() {
-    x.set(0);
-    y.set(0);
-  }
-
-  return (
-    <motion.div
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
+const CosmosBackground = () => <AnimatedCosmos density={15} />;
 
 export default function HomePage() {
   const router = useRouter();
