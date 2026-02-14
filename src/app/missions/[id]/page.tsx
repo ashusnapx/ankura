@@ -276,7 +276,7 @@ export default function MissionPage({
             </div>
 
             {/* Narrative */}
-            <motion.p className='text-lg font-medium text-indigo leading-snug text-center tracking-tight'>
+            <motion.p className='text-xl sm:text-2xl font-narrative text-indigo leading-relaxed text-center tracking-tight italic'>
               {currentScene.narrative}
             </motion.p>
 
@@ -288,21 +288,21 @@ export default function MissionPage({
                     {currentScene.speaker}
                   </p>
                 )}
-                <div className='space-y-2'>
-                  <p className='text-kannada text-3xl font-bold text-indigo leading-tight'>
+                <div className='space-y-3'>
+                  <p className='font-native text-4xl sm:text-5xl font-bold text-indigo leading-tight'>
                     {currentScene.kannadaDialogue}
                   </p>
-                  <p className='text-md font-medium text-indigo-light'>
+                  <p className='font-technical text-sm sm:text-md font-medium text-indigo/60 lowercase tracking-tight'>
                     {currentScene.transliteration}
                   </p>
                 </div>
 
                 <div className='mt-6 pt-6 border-t border-gold-dark/30 flex items-center justify-between'>
-                  <div className='flex flex-wrap gap-2'>
-                    <div className='text-[10px] font-bold bg-white/50 px-2 py-0.5 rounded text-indigo/40 uppercase tracking-tighter'>
+                  <div className='flex flex-wrap gap-4'>
+                    <div className='text-sm font-mnemonic text-noun bg-white/60 px-3 py-1 rounded-lg shadow-sm transform -rotate-1'>
                       HI: {currentScene.hindiHint}
                     </div>
-                    <div className='text-[10px] font-bold bg-white/50 px-2 py-0.5 rounded text-indigo/40 uppercase tracking-tighter'>
+                    <div className='text-sm font-mnemonic text-adj bg-white/60 px-3 py-1 rounded-lg shadow-sm transform rotate-1'>
                       EN: {currentScene.englishHint}
                     </div>
                   </div>

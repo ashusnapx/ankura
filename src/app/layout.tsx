@@ -1,5 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Noto_Serif_Kannada } from "next/font/google";
+import {
+  Inter,
+  Noto_Serif_Kannada,
+  DM_Serif_Display,
+  Kalam,
+  Roboto_Mono,
+} from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -11,6 +17,26 @@ const inter = Inter({
 const kannada = Noto_Serif_Kannada({
   subsets: ["kannada"],
   variable: "--font-kannada",
+  display: "swap",
+});
+
+const story = DM_Serif_Display({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-story",
+  display: "swap",
+});
+
+const note = Kalam({
+  weight: ["300", "400", "700"],
+  subsets: ["latin"],
+  variable: "--font-note",
+  display: "swap",
+});
+
+const mono = Roboto_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -82,7 +108,7 @@ export default function RootLayout({
         <meta name='apple-mobile-web-app-status-bar-style' content='default' />
       </head>
       <body
-        className={`${inter.variable} ${kannada.variable} antialiased font-sans bg-white text-indigo`}
+        className={`${inter.variable} ${kannada.variable} ${story.variable} ${note.variable} ${mono.variable} antialiased font-sans bg-white text-indigo`}
       >
         <Navbar />
         {/* Accessibility: skip to content */}

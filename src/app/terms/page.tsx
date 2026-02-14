@@ -14,24 +14,24 @@ export default function TermsPage() {
           animate={{ opacity: 1, y: 0 }}
           className='max-w-3xl'
         >
-          <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-terracotta/5 border border-terracotta/10 text-terracotta/60 mb-8'>
+          <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-terracotta/5 border border-terracotta/10 text-terracotta/60 mb-8 font-technical'>
             <FileText size={14} />
             <span className='text-[10px] font-black uppercase tracking-widest'>
               The Rules of the Garden
             </span>
           </div>
 
-          <h1 className='text-6xl md:text-8xl font-black text-indigo tracking-tighter mb-8'>
+          <h1 className='text-6xl md:text-8xl font-black text-indigo tracking-tighter mb-8 font-ui'>
             Terms of <span className='text-indigo/20'>Service</span>
           </h1>
 
-          <div className='space-y-16 mt-20'>
+          <div className='space-y-16 mt-20 font-narrative'>
             <section className='space-y-6'>
               <div className='flex items-center gap-4'>
-                <div className='w-10 h-10 rounded-xl bg-indigo flex items-center justify-center text-white font-black'>
+                <div className='w-10 h-10 rounded-xl bg-indigo flex items-center justify-center text-white font-black font-technical'>
                   01
                 </div>
-                <h2 className='text-3xl font-black text-indigo tracking-tight'>
+                <h2 className='text-3xl font-black text-indigo tracking-tight font-ui'>
                   Grant of Usage
                 </h2>
               </div>
@@ -46,10 +46,10 @@ export default function TermsPage() {
 
             <section className='space-y-6'>
               <div className='flex items-center gap-4'>
-                <div className='w-10 h-10 rounded-xl bg-indigo flex items-center justify-center text-white font-black'>
+                <div className='w-10 h-10 rounded-xl bg-indigo flex items-center justify-center text-white font-black font-technical'>
                   02
                 </div>
-                <h2 className='text-3xl font-black text-indigo tracking-tight'>
+                <h2 className='text-3xl font-black text-indigo tracking-tight font-ui'>
                   The &quot;Beta&quot; Clause
                 </h2>
               </div>
@@ -63,10 +63,10 @@ export default function TermsPage() {
 
             <section className='space-y-6'>
               <div className='flex items-center gap-4'>
-                <div className='w-10 h-10 rounded-xl bg-indigo flex items-center justify-center text-white font-black'>
+                <div className='w-10 h-10 rounded-xl bg-indigo flex items-center justify-center text-white font-black font-technical'>
                   03
                 </div>
-                <h2 className='text-3xl font-black text-indigo tracking-tight'>
+                <h2 className='text-3xl font-black text-indigo tracking-tight font-ui'>
                   Community Conduct
                 </h2>
               </div>

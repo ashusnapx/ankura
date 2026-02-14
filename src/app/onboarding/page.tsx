@@ -130,10 +130,10 @@ export default function OnboardingPage() {
                   <div className='w-20 h-20 bg-indigo rounded-[24px] flex items-center justify-center text-white font-black text-4xl shadow-2xl shadow-indigo/20 mb-8 border-4 border-white'>
                     A
                   </div>
-                  <h1 className='text-6xl md:text-8xl font-black text-indigo tracking-tighter'>
+                  <h1 className='text-6xl md:text-8xl font-black text-indigo tracking-tighter font-ui'>
                     Welcome to <span className='text-terracotta'>Ankura</span>
                   </h1>
-                  <p className='text-3xl font-bold font-kannada text-terracotta opacity-60 mt-2'>
+                  <p className='font-native text-3xl font-black text-terracotta/40 mt-2'>
                     ಅಂಕುರ — ದಿ ಬಿಗಿನಿಂಗ್ ಆಫ್ ಗ್ರೋತ್
                   </p>
                 </motion.div>
@@ -144,7 +144,7 @@ export default function OnboardingPage() {
                   transition={{ delay: 0.4 }}
                   className='max-w-2xl mx-auto space-y-6'
                 >
-                  <p className='text-xl md:text-2xl text-indigo/60 leading-relaxed font-medium'>
+                  <p className='text-xl md:text-2xl text-indigo/60 leading-relaxed font-medium font-narrative'>
                     This is <span className='text-indigo font-black'>not</span>{" "}
                     a language app. It&apos;s your new life in Bangalore, told
                     through the stories that happen between people.
@@ -162,21 +162,21 @@ export default function OnboardingPage() {
                     transition={{ delay: 0.6 + i * 0.1 }}
                   >
                     <TiltCard className='h-full'>
-                      <div className='h-full p-8 rounded-[32px] bg-white border border-gold/20 shadow-xl shadow-indigo/5 space-y-4 text-left group hover:border-indigo/20 transition-all'>
+                      <div className='h-full p-8 rounded-[40px] bg-white border border-gold/20 shadow-xl shadow-indigo/5 space-y-4 text-left group hover:border-indigo/20 transition-all'>
                         <div
                           className={`w-12 h-12 rounded-2xl ${item.color} flex items-center justify-center text-white shadow-lg`}
                         >
                           <item.icon size={24} />
                         </div>
                         <div className='space-y-1'>
-                          <h3 className='text-xl font-black text-indigo'>
+                          <h3 className='text-xl font-black text-indigo font-ui'>
                             {item.title}
                           </h3>
-                          <p className='font-kannada text-indigo/30 font-bold'>
+                          <p className='font-native text-indigo/30 font-black'>
                             {item.kn}
                           </p>
                         </div>
-                        <p className='text-sm font-medium text-indigo/60 leading-relaxed'>
+                        <p className='text-sm font-medium text-indigo/60 leading-relaxed font-narrative'>
                           {item.content}
                         </p>
                       </div>
@@ -195,7 +195,7 @@ export default function OnboardingPage() {
                   whileHover={{ scale: 1.05, y: -5 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setStep(1)}
-                  className='rounded-3xl bg-indigo px-12 py-6 text-xl font-black text-white shadow-2xl shadow-indigo/30 transition-all flex items-center gap-4 group'
+                  className='rounded-[32px] bg-indigo px-12 py-6 text-xl font-black text-white shadow-2xl shadow-indigo/30 transition-all flex items-center gap-4 group font-ui'
                 >
                   Start Your Odyssey
                   <ArrowRight
@@ -203,7 +203,7 @@ export default function OnboardingPage() {
                     className='group-hover:translate-x-2 transition-transform'
                   />
                 </motion.button>
-                <p className='text-xs font-black text-indigo/20 uppercase tracking-[0.4em]'>
+                <p className='text-[10px] font-black text-indigo/20 uppercase tracking-[0.4em] font-technical'>
                   3 minutes to your first word
                 </p>
               </motion.div>
@@ -220,16 +220,16 @@ export default function OnboardingPage() {
               className='max-w-xl w-full text-center space-y-12'
             >
               <div className='space-y-4'>
-                <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo/5 border border-indigo/10 text-indigo/40 mb-4'>
+                <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo/5 border border-indigo/10 text-indigo/40 mb-4 font-technical'>
                   <Sparkles size={14} />
                   <span className='text-[10px] font-black uppercase tracking-widest'>
                     Initialization
                   </span>
                 </div>
-                <h2 className='text-5xl font-black text-indigo tracking-tighter'>
+                <h2 className='text-5xl font-black text-indigo tracking-tighter font-ui'>
                   Your Name, <span className='text-terracotta'>Explorer?</span>
                 </h2>
-                <p className='text-lg font-medium text-indigo/40'>
+                <p className='text-lg font-medium text-indigo/40 font-narrative'>
                   Every story needs a protagonist. What shall we call you?
                 </p>
               </div>
@@ -240,12 +240,12 @@ export default function OnboardingPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder='Enter name...'
-                  className='w-full rounded-3xl border-2 border-gold/10 bg-white/50 backdrop-blur-xl px-8 py-6 text-center text-2xl font-black text-indigo placeholder:text-indigo/10 focus:border-indigo focus:bg-white focus:shadow-2xl transition-all outline-none'
+                  className='w-full rounded-[32px] border-2 border-gold/10 bg-white/50 backdrop-blur-xl px-8 py-6 text-center text-2xl font-black text-indigo placeholder:text-indigo/10 focus:border-indigo focus:bg-white focus:shadow-2xl transition-all outline-none font-ui'
                   autoFocus
                 />
                 <motion.div
                   animate={{ opacity: name.trim() ? 0 : 1 }}
-                  className='absolute -bottom-10 left-0 right-0 text-[10px] font-black text-indigo/20 uppercase tracking-[0.3em] flex items-center justify-center gap-2'
+                  className='absolute -bottom-10 left-0 right-0 text-[10px] font-black text-indigo/20 uppercase tracking-[0.3em] flex items-center justify-center gap-2 font-technical'
                 >
                   <MousePointer2 size={12} /> Type to begin
                 </motion.div>
@@ -256,7 +256,7 @@ export default function OnboardingPage() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setStep(2)}
                 disabled={!name.trim()}
-                className='rounded-2xl bg-terracotta px-12 py-5 text-lg font-black text-white shadow-2xl shadow-terracotta/20 disabled:opacity-20 disabled:grayscale transition-all'
+                className='font-ui rounded-[24px] bg-terracotta px-12 py-5 text-lg font-black text-white shadow-2xl shadow-terracotta/20 transition-all disabled:opacity-20 disabled:grayscale'
               >
                 Establish Identity
               </motion.button>
@@ -273,10 +273,10 @@ export default function OnboardingPage() {
               className='max-w-3xl w-full text-center space-y-12'
             >
               <div className='space-y-4'>
-                <h2 className='text-5xl font-black text-indigo tracking-tighter leading-tight'>
+                <h2 className='text-5xl font-black text-indigo tracking-tighter leading-tight font-ui'>
                   What <span className='text-terracotta'>Drives</span> You?
                 </h2>
-                <p className='text-lg font-medium text-indigo/40 max-w-lg mx-auto'>
+                <p className='text-lg font-medium text-indigo/40 max-w-lg mx-auto font-narrative'>
                   We&apos;ll curate your first stories based on your motivation.
                 </p>
               </div>
@@ -294,7 +294,7 @@ export default function OnboardingPage() {
                       whileHover={{ scale: 1.02, y: -4 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => toggleGoal(goal.id)}
-                      className={`group relative flex flex-col items-start gap-6 rounded-[32px] p-8 text-left transition-all border-2 overflow-hidden ${
+                      className={`group relative flex flex-col items-start gap-6 rounded-[40px] p-8 text-left transition-all border-2 overflow-hidden ${
                         isSelected ?
                           "border-terracotta bg-white shadow-2xl shadow-terracotta/10"
                         : "border-gold/10 bg-white/50 hover:bg-white hover:border-gold/30"
@@ -307,17 +307,17 @@ export default function OnboardingPage() {
                       </div>
                       <div className='space-y-2'>
                         <div className='flex items-center gap-3'>
-                          <p className='text-xl font-black text-indigo'>
+                          <p className='text-xl font-black text-indigo font-ui'>
                             {goal.label}
                           </p>
                           {isSelected && (
                             <Check size={18} className='text-terracotta' />
                           )}
                         </div>
-                        <p className='text-xs font-bold text-indigo/40 leading-relaxed'>
+                        <p className='text-sm font-medium text-indigo/40 leading-relaxed font-narrative'>
                           {goal.desc}
                         </p>
-                        <p className='text-xs font-black text-terracotta/30 font-kannada tracking-widest pt-2 uppercase'>
+                        <p className='font-native text-[10px] font-black text-terracotta/40 tracking-widest pt-2 uppercase'>
                           {goal.labelKn}
                         </p>
                       </div>
@@ -336,7 +336,7 @@ export default function OnboardingPage() {
                   whileTap={{ scale: 0.9 }}
                   onClick={handleComplete}
                   disabled={selectedGoals.length === 0}
-                  className='rounded-[32px] bg-indigo px-16 py-7 text-2xl font-black text-white shadow-2xl shadow-indigo/30 disabled:opacity-20 transition-all flex items-center gap-4 group'
+                  className='rounded-[40px] bg-indigo px-16 py-7 text-2xl font-black text-white shadow-2xl shadow-indigo/30 disabled:opacity-20 transition-all flex items-center gap-4 group font-ui'
                 >
                   Enter Your Story
                   <Sparkles
@@ -347,7 +347,7 @@ export default function OnboardingPage() {
 
                 <button
                   onClick={handleComplete}
-                  className='text-[10px] font-black text-indigo/20 uppercase tracking-[0.5em] hover:text-indigo/40 transition-colors'
+                  className='text-[10px] font-black text-indigo/20 uppercase tracking-[0.5em] hover:text-indigo/40 transition-colors font-technical'
                 >
                   Skip Onboarding
                 </button>

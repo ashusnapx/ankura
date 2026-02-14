@@ -159,11 +159,14 @@ export default function DashboardPage() {
         <div className='mx-auto max-w-lg relative z-10'>
           <div className='flex items-center justify-between mb-8'>
             <div className='space-y-1'>
-              <h1 className='text-4xl font-black text-white tracking-tight flex items-center gap-3'>
-                Hello <span className='text-gold'>{user.name}</span>
+              <h1 className='text-4xl font-black text-white tracking-tight flex items-center gap-3 font-ui'>
+                Hello{" "}
+                <span className='text-gold font-narrative italic'>
+                  {user.name}
+                </span>
                 <Crown className='text-gold' size={24} />
               </h1>
-              <p className='text-white/40 text-sm font-bold uppercase tracking-[0.2em]'>
+              <p className='text-white/40 text-sm font-black uppercase tracking-[0.2em] font-technical'>
                 Lvl {user.level} • {appStats.xp} XP Earned
               </p>
             </div>
@@ -174,10 +177,10 @@ export default function DashboardPage() {
 
           <div className='space-y-3'>
             <div className='flex justify-between items-end'>
-              <span className='text-[10px] font-black text-white/40 uppercase tracking-[0.3em]'>
+              <span className='text-[10px] font-black text-white/40 uppercase tracking-[0.3em] font-ui'>
                 Level {user.level} Journey
               </span>
-              <span className='text-xs font-black text-white'>
+              <span className='text-xs font-black text-white font-technical'>
                 {user.xp % 1000} / 1000 XP
               </span>
             </div>
@@ -233,7 +236,7 @@ export default function DashboardPage() {
             ].map((stat, i) => (
               <div
                 key={i}
-                className='bg-white p-6 rounded-[32px] border border-gold/20 shadow-xl shadow-indigo/5 flex flex-col gap-4 group hover:scale-[1.02] transition-transform cursor-default'
+                className='bg-white/90 backdrop-blur-xl p-6 rounded-[40px] border border-gold/20 shadow-xl shadow-indigo/5 flex flex-col gap-4 group hover:scale-[1.02] transition-transform cursor-default'
               >
                 <div
                   className={`w-12 h-12 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center group-hover:rotate-12 transition-transform duration-500`}
@@ -241,10 +244,12 @@ export default function DashboardPage() {
                   {stat.icon}
                 </div>
                 <div>
-                  <p className='text-4xl font-black text-indigo tracking-tighter'>
+                  <p
+                    className={`text-4xl font-black tracking-tighter font-technical ${stat.color}`}
+                  >
                     {stat.value}
                   </p>
-                  <p className='text-[10px] font-black text-indigo/20 uppercase tracking-widest leading-none mt-1'>
+                  <p className='text-[10px] font-black text-indigo/20 uppercase tracking-widest leading-none mt-1 font-ui'>
                     {stat.label}
                   </p>
                 </div>
@@ -259,10 +264,10 @@ export default function DashboardPage() {
           >
             <div className='flex items-center justify-between mb-8'>
               <div className='space-y-1'>
-                <h3 className='text-lg font-black text-indigo tracking-tight'>
+                <h3 className='text-lg font-black text-indigo tracking-tight font-ui'>
                   Skill Matrix
                 </h3>
-                <p className='text-[10px] font-bold text-indigo/30 uppercase tracking-widest'>
+                <p className='text-[10px] font-bold text-indigo/30 uppercase tracking-widest font-ui'>
                   Core Competencies
                 </p>
               </div>
@@ -298,7 +303,7 @@ export default function DashboardPage() {
           <motion.div variants={fadeUp} className='space-y-4'>
             <div className='flex items-center gap-2 px-2'>
               <Sparkles size={16} className='text-indigo' />
-              <h3 className='text-sm font-black text-indigo uppercase tracking-widest'>
+              <h3 className='text-sm font-black text-indigo uppercase tracking-widest font-ui'>
                 Ankura AI Context
               </h3>
             </div>
@@ -331,10 +336,10 @@ export default function DashboardPage() {
                     {insight.icon}
                   </div>
                   <div className='space-y-1 relative z-10'>
-                    <p className='text-[10px] font-black uppercase tracking-widest text-white/50'>
+                    <p className='text-[10px] font-black uppercase tracking-widest text-white/50 font-ui'>
                       {insight.title}
                     </p>
-                    <p className='text-sm font-medium leading-relaxed'>
+                    <p className='text-sm font-medium leading-relaxed font-narrative'>
                       {insight.text}
                     </p>
                   </div>
@@ -350,14 +355,14 @@ export default function DashboardPage() {
           >
             <div className='flex items-center justify-between'>
               <div className='space-y-1'>
-                <h3 className='text-lg font-black text-indigo tracking-tight'>
+                <h3 className='text-lg font-black text-indigo tracking-tight font-ui'>
                   Bridge Mastery
                 </h3>
-                <p className='text-[10px] font-bold text-indigo/30 uppercase tracking-widest'>
+                <p className='text-[10px] font-bold text-indigo/30 uppercase tracking-widest font-ui'>
                   Level {bridgeLevel} Progress
                 </p>
               </div>
-              <div className='bg-secondary px-4 py-2 rounded-full text-xs font-black text-indigo'>
+              <div className='bg-secondary px-4 py-2 rounded-full text-xs font-black text-indigo font-technical'>
                 {stats.bridgeWordsUnlocked} Words
               </div>
             </div>
@@ -370,11 +375,11 @@ export default function DashboardPage() {
                       <span className='text-2xl group-hover:scale-125 transition-transform'>
                         {cat.icon}
                       </span>
-                      <span className='text-xs font-black text-indigo uppercase tracking-wider'>
+                      <span className='text-xs font-black text-indigo uppercase tracking-wider font-ui'>
                         {cat.name}
                       </span>
                     </div>
-                    <span className='text-[10px] font-black text-indigo/20'>
+                    <span className='text-[10px] font-black text-indigo/20 font-technical'>
                       {cat.count}/{cat.total}
                     </span>
                   </div>
@@ -407,7 +412,7 @@ export default function DashboardPage() {
               className='group-hover:rotate-12 transition-transform'
               size={24}
             />
-            <span className='font-black uppercase tracking-[0.3em] text-sm'>
+            <span className='font-black uppercase tracking-[0.3em] text-sm font-ui'>
               Begin Daily Quest
             </span>
             <ChevronRight size={20} className='opacity-40' />

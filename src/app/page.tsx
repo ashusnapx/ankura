@@ -165,17 +165,22 @@ export default function HomePage() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className='space-y-2'
+                    className='space-y-4'
                   >
-                    <h1 className='text-4xl sm:text-6xl md:text-8xl font-black text-indigo tracking-tighter leading-tight'>
+                    <h1 className='text-4xl sm:text-6xl md:text-8xl font-black text-indigo tracking-tighter leading-tight font-ui'>
                       {greeting.en},{" "}
-                      <span className='text-terracotta'>
+                      <span className='text-noun font-narrative italic'>
                         {progress?.userName || "Explorer"}
                       </span>
                     </h1>
-                    <p className='font-kannada text-2xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-indigo via-terracotta to-indigo bg-clip-text text-transparent leading-relaxed tracking-tight'>
-                      {greeting.kn}
-                    </p>
+                    <div className='relative'>
+                      <p className='font-native text-3xl sm:text-5xl md:text-7xl font-bold bg-gradient-to-r from-indigo via-terracotta to-indigo bg-clip-text text-transparent leading-relaxed tracking-tight py-2'>
+                        {greeting.kn}
+                      </p>
+                      <p className='font-mnemonic text-lg sm:text-2xl text-indigo/30 absolute -bottom-4 left-0 italic'>
+                        {greeting.hi}
+                      </p>
+                    </div>
                   </motion.div>
                 : <div className='h-40 w-full animate-pulse bg-indigo/5 rounded-[40px]' />
                 }
@@ -188,7 +193,6 @@ export default function HomePage() {
               className='relative z-[100] flex flex-col items-center'
             >
               <div className='bg-white/90 backdrop-blur-2xl p-8 rounded-[40px] border border-gold/20 shadow-2xl relative group'>
-                {/* Ensure StreakCounter/Calendar has highest priority */}
                 <div className='absolute -top-3 -right-3 w-10 h-10 bg-terracotta text-white rounded-2xl flex items-center justify-center shadow-lg transform group-hover:rotate-12 transition-transform z-50'>
                   <Flame size={20} />
                 </div>
@@ -217,11 +221,11 @@ export default function HomePage() {
                           <div className='flex items-center justify-between'>
                             <div className='flex items-center gap-4 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/10'>
                               <Sparkles size={14} className='text-gold' />
-                              <span className='text-[10px] font-black uppercase tracking-[0.2em]'>
+                              <span className='text-[10px] font-black uppercase tracking-[0.2em] font-ui'>
                                 Recommended Next Step
                               </span>
                             </div>
-                            <div className='flex items-center gap-2 text-[10px] font-black text-white/40 uppercase tracking-[0.2em]'>
+                            <div className='flex items-center gap-2 text-[10px] font-black text-white/40 uppercase tracking-[0.2em] font-technical'>
                               <Clock size={12} strokeWidth={3} />~
                               {nextMission.estimatedMinutes} Mins
                             </div>
@@ -236,13 +240,13 @@ export default function HomePage() {
                               {nextMission.illustration}
                             </motion.div>
                             <div className='space-y-4'>
-                              <p className='text-xs font-black text-gold uppercase tracking-[0.4em]'>
+                              <p className='text-xs font-black text-gold uppercase tracking-[0.4em] font-ui'>
                                 Story Odyssey
                               </p>
-                              <h2 className='text-4xl sm:text-6xl font-black tracking-tighter leading-[0.9] text-white'>
+                              <h2 className='text-4xl sm:text-6xl font-black tracking-tighter leading-[0.9] text-white font-narrative'>
                                 {nextMission.title}
                               </h2>
-                              <p className='text-xl sm:text-3xl font-bold text-white/40 text-kannada'>
+                              <p className='text-xl sm:text-3xl font-bold text-white/40 font-native'>
                                 {nextMission.titleKannada}
                               </p>
                             </div>
@@ -405,24 +409,29 @@ export default function HomePage() {
                           label: "Vocabulary",
                           value: progress?.wordsEncountered?.length || 0,
                           color: "bg-terracotta",
+                          text: "text-noun",
                         },
                         {
                           label: "Completion",
                           value: `${completedMissionIds.length} Stories`,
-                          color: "bg-gold-dark",
+                          color: "bg-indigo",
+                          text: "text-verb",
                         },
                         {
                           label: "Streak",
                           value: `${streak} Days`,
                           color: "bg-green",
+                          text: "text-adj",
                         },
                       ].map((stat, i) => (
                         <div key={i} className='flex flex-col gap-2'>
                           <div className='flex justify-between items-end px-1'>
-                            <span className='text-[10px] font-black text-indigo/40 uppercase tracking-widest'>
+                            <span className='text-[10px] font-black text-indigo/40 uppercase tracking-widest font-ui'>
                               {stat.label}
                             </span>
-                            <span className='text-sm font-black text-indigo'>
+                            <span
+                              className={`text-sm font-black font-technical ${stat.text}`}
+                            >
                               {stat.value}
                             </span>
                           </div>
@@ -430,7 +439,7 @@ export default function HomePage() {
                             <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: "100%" }}
-                              className={`h-full ${stat.color} rounded-full`}
+                              className={`h-full ${stat.color} rounded-full opacity-80`}
                             />
                           </div>
                         </div>

@@ -100,20 +100,21 @@ export default function ShadowSpeakingPage() {
     <div className='min-h-screen bg-white'>
       <div className='container-responsive pt-12 pb-24'>
         <div className='mb-12'>
-          <h1 className='text-4xl font-black text-indigo tracking-tight mb-2'>
-            Shadow Speaking
+          <h1 className='text-4xl font-black text-indigo tracking-tight mb-2 font-ui'>
+            Shadow <span className='text-terracotta'>Speaking</span>
           </h1>
-          <p className='text-lg font-medium text-indigo-light'>
+          <p className='text-lg font-medium text-indigo-light font-narrative'>
             Listen, then repeat. Train your Kannada voice.
           </p>
         </div>
 
         <div className='flex items-center gap-3 mb-10'>
-          <div className='rounded-full bg-secondary px-6 py-2 text-xs font-black text-indigo/40 uppercase tracking-widest'>
-            Best: <span className='text-green'>{bestScore}%</span>
+          <div className='rounded-full bg-secondary px-6 py-2 text-[10px] font-black text-indigo/40 uppercase tracking-widest font-ui'>
+            Best:{" "}
+            <span className='text-green font-technical'>{bestScore}%</span>
           </div>
           <div className='flex-1' />
-          <div className='text-xs font-black text-indigo/20 uppercase tracking-[0.2em]'>
+          <div className='text-[10px] font-black text-indigo/20 uppercase tracking-[0.2em] font-technical'>
             {currentIndex + 1} of {words.length}
           </div>
         </div>
@@ -129,19 +130,19 @@ export default function ShadowSpeakingPage() {
           >
             <div className='rounded-[40px] bg-secondary p-12 text-center space-y-8'>
               <div className='space-y-4'>
-                <p className='text-kannada text-6xl font-black text-indigo leading-tight'>
+                <p className='font-native text-6xl font-black text-indigo leading-tight'>
                   {currentWord.kannadaText}
                 </p>
-                <p className='text-2xl font-bold text-indigo/40'>
+                <p className='text-2xl font-black text-indigo/20 font-technical lowercase tracking-tighter'>
                   {currentWord.transliteration}
                 </p>
               </div>
 
-              <div className='flex items-center justify-center gap-8'>
-                <div className='text-xs font-black bg-white/50 px-4 py-2 rounded-xl text-indigo/30 uppercase tracking-widest'>
+              <div className='flex items-center justify-center gap-6'>
+                <div className='text-sm font-mnemonic bg-white/50 px-4 py-1.5 rounded-xl text-noun shadow-sm transform -rotate-1'>
                   HI: {currentWord.hindi}
                 </div>
-                <div className='text-xs font-black bg-white/50 px-4 py-2 rounded-xl text-indigo/30 uppercase tracking-widest'>
+                <div className='text-sm font-mnemonic bg-white/50 px-4 py-1.5 rounded-xl text-adj shadow-sm transform rotate-1'>
                   EN: {currentWord.english}
                 </div>
               </div>
@@ -149,9 +150,9 @@ export default function ShadowSpeakingPage() {
               {isSpeechSynthesisSupported() && (
                 <button
                   onClick={() => speakText(currentWord.kannadaText)}
-                  className='inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-sm font-black text-indigo hover:text-terracotta transition-all shadow-sm hover:shadow-xl active:scale-95'
+                  className='inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-[10px] font-black text-indigo uppercase tracking-widest hover:text-terracotta transition-all shadow-sm hover:shadow-xl active:scale-95 font-ui'
                 >
-                  <Volume2 size={20} /> Listen to Guide
+                  <Volume2 size={16} /> Listen to Guide
                 </button>
               )}
             </div>
@@ -191,7 +192,7 @@ export default function ShadowSpeakingPage() {
               }
 
               {isListening && (
-                <p className='text-xs font-black text-indigo/20 uppercase tracking-[0.3em] animate-pulse'>
+                <p className='text-[10px] font-black text-terracotta uppercase tracking-[0.4em] animate-pulse font-ui'>
                   Listening for Kannada...
                 </p>
               )}
@@ -211,12 +212,12 @@ export default function ShadowSpeakingPage() {
                       className={`h-full ${accuracy >= 70 ? "bg-green" : "bg-terracotta"}`}
                     />
                   </div>
-                  <p className='text-sm font-bold text-white/40 italic'>
+                  <p className='text-sm font-bold text-white/40 italic font-narrative'>
                     You said &ldquo;{transcript}&rdquo;
                   </p>
                   <div className='flex flex-col items-center gap-2'>
                     <p
-                      className={`text-6xl font-black ${
+                      className={`text-7xl font-black font-technical ${
                         accuracy >= 70 ? "text-green"
                         : accuracy >= 40 ? "text-gold"
                         : "text-destructive"
@@ -224,7 +225,7 @@ export default function ShadowSpeakingPage() {
                     >
                       {accuracy}%
                     </p>
-                    <p className='text-xs font-black text-white/20 uppercase tracking-widest'>
+                    <p className='text-[10px] font-black text-white/20 uppercase tracking-[0.3em] font-ui'>
                       Match Accuracy
                     </p>
                   </div>

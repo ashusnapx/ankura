@@ -18,16 +18,16 @@ export default function FeedbackPage() {
           className='max-w-4xl mx-auto'
         >
           <div className='text-center mb-16 space-y-4'>
-            <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo/5 border border-indigo/10 text-indigo/40 mb-4'>
+            <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo/5 border border-indigo/10 text-indigo/40 mb-4 font-technical'>
               <MessageSquare size={14} />
               <span className='text-[10px] font-black uppercase tracking-widest'>
                 Help Us Grow
               </span>
             </div>
-            <h1 className='text-6xl md:text-8xl font-black text-indigo tracking-tighter'>
+            <h1 className='text-6xl md:text-8xl font-black text-indigo tracking-tighter font-ui'>
               Share Your <span className='text-terracotta'>Thoughts</span>
             </h1>
-            <p className='text-xl font-medium text-indigo/60 max-w-2xl mx-auto'>
+            <p className='text-xl font-medium text-indigo/60 max-w-2xl mx-auto font-narrative'>
               Ankura is built by the community, for the community. Your feedback
               directly shapes the future of our stories.
             </p>
@@ -44,39 +44,39 @@ export default function FeedbackPage() {
                   }}
                 >
                   <div className='space-y-4'>
-                    <label className='text-[10px] font-black text-indigo/20 uppercase tracking-widest px-1'>
+                    <label className='text-[10px] font-black text-indigo/20 uppercase tracking-widest px-1 font-technical'>
                       Your Odyssey Name
                     </label>
                     <input
                       type='text'
                       placeholder='Name'
-                      className='w-full px-6 py-4 rounded-2xl bg-indigo/5 border border-transparent focus:border-indigo/20 focus:bg-white transition-all outline-none font-bold text-indigo placeholder:text-indigo/20'
+                      className='w-full px-6 py-4 rounded-2xl bg-indigo/5 border border-transparent focus:border-indigo/20 focus:bg-white transition-all outline-none font-bold text-indigo placeholder:text-indigo/20 font-ui'
                     />
                   </div>
 
                   <div className='space-y-4'>
-                    <label className='text-[10px] font-black text-indigo/20 uppercase tracking-widest px-1'>
+                    <label className='text-[10px] font-black text-indigo/20 uppercase tracking-widest px-1 font-technical'>
                       Email Address
                     </label>
                     <input
                       type='email'
                       placeholder='hello@example.com'
-                      className='w-full px-6 py-4 rounded-2xl bg-indigo/5 border border-transparent focus:border-indigo/20 focus:bg-white transition-all outline-none font-bold text-indigo placeholder:text-indigo/20'
+                      className='w-full px-6 py-4 rounded-2xl bg-indigo/5 border border-transparent focus:border-indigo/20 focus:bg-white transition-all outline-none font-bold text-indigo placeholder:text-indigo/20 font-ui'
                     />
                   </div>
 
                   <div className='space-y-4'>
-                    <label className='text-[10px] font-black text-indigo/20 uppercase tracking-widest px-1'>
+                    <label className='text-[10px] font-black text-indigo/20 uppercase tracking-widest px-1 font-technical'>
                       The Message
                     </label>
                     <textarea
                       rows={4}
                       placeholder='How can we make your learning better?'
-                      className='w-full px-6 py-4 rounded-2xl bg-indigo/5 border border-transparent focus:border-indigo/20 focus:bg-white transition-all outline-none font-bold text-indigo placeholder:text-indigo/20 resize-none'
+                      className='w-full px-6 py-4 rounded-2xl bg-indigo/5 border border-transparent focus:border-indigo/20 focus:bg-white transition-all outline-none font-bold text-indigo placeholder:text-indigo/20 resize-none font-narrative'
                     />
                   </div>
 
-                  <button className='w-full py-5 bg-indigo text-white rounded-2xl font-black shadow-xl shadow-indigo/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3'>
+                  <button className='w-full py-5 bg-indigo text-white rounded-2xl font-black shadow-xl shadow-indigo/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 font-ui uppercase tracking-widest'>
                     Submit Feedback <Send size={18} />
                   </button>
                 </form>
@@ -88,16 +88,16 @@ export default function FeedbackPage() {
                   <div className='w-20 h-20 rounded-full bg-terracotta/10 flex items-center justify-center text-terracotta'>
                     <ThumbsUp size={40} />
                   </div>
-                  <h3 className='text-3xl font-black text-indigo tracking-tight'>
+                  <h3 className='text-3xl font-black text-indigo tracking-tight font-ui'>
                     Dhanyavadagalu!
                   </h3>
-                  <p className='text-indigo/60 font-medium'>
+                  <p className='text-indigo/60 font-medium font-narrative'>
                     We&apos;ve received your feedback and will review it
                     shortly.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className='text-xs font-black text-indigo/20 uppercase tracking-widest hover:text-indigo transition-colors'
+                    className='text-[10px] font-black text-indigo/20 uppercase tracking-widest hover:text-indigo transition-colors font-technical'
                   >
                     Send another note
                   </button>
@@ -107,10 +107,10 @@ export default function FeedbackPage() {
 
             <div className='p-12 lg:p-16 bg-secondary/30 space-y-12'>
               <div className='space-y-4'>
-                <h4 className='text-xs font-black text-indigo uppercase tracking-widest'>
+                <h4 className='text-xs font-black text-indigo uppercase tracking-widest font-ui'>
                   Our Commitment
                 </h4>
-                <p className='text-sm font-medium text-indigo/60 leading-relaxed'>
+                <p className='text-sm font-medium text-indigo/60 leading-relaxed font-narrative'>
                   We read every single piece of feedback. Whether it&apos;s a
                   bug report or a suggestion for a new story set in
                   Malleshwaram, we want to hear it.
@@ -123,10 +123,10 @@ export default function FeedbackPage() {
                     <Sparkles size={18} />
                   </div>
                   <div>
-                    <p className='text-sm font-black text-indigo'>
+                    <p className='text-sm font-black text-indigo font-ui'>
                       Feature Requests
                     </p>
-                    <p className='text-xs font-medium text-indigo/40'>
+                    <p className='text-[10px] font-black uppercase tracking-widest text-indigo/20 font-technical'>
                       Tell us what tools you need to master Kannada faster.
                     </p>
                   </div>
@@ -136,10 +136,10 @@ export default function FeedbackPage() {
                     <MessageSquare size={18} />
                   </div>
                   <div>
-                    <p className='text-sm font-black text-indigo'>
+                    <p className='text-sm font-black text-indigo font-ui'>
                       Bug Reports
                     </p>
-                    <p className='text-xs font-medium text-indigo/40'>
+                    <p className='text-[10px] font-black uppercase tracking-widest text-indigo/20 font-technical'>
                       Helps us polish the experience across all devices.
                     </p>
                   </div>

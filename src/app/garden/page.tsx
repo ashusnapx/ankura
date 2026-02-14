@@ -221,10 +221,10 @@ export default function GardenPage() {
                     {getPlantEmoji(word.reviewLevel, word.health)}
                   </motion.div>
                   <div className='text-center'>
-                    <p className='text-kannada text-2xl font-black text-indigo leading-tight line-clamp-1'>
+                    <p className='font-native text-2xl font-black text-indigo leading-tight line-clamp-1'>
                       {word.kannadaText}
                     </p>
-                    <p className='text-xs font-bold text-indigo/30 uppercase tracking-tighter mt-3'>
+                    <p className='text-xs font-bold text-noun uppercase tracking-tighter mt-3 font-ui'>
                       {word.english}
                     </p>
                   </div>
@@ -309,10 +309,10 @@ export default function GardenPage() {
                 </div>
 
                 <div className='space-y-4'>
-                  <h2 className='text-kannada text-7xl font-black text-indigo tracking-tight'>
+                  <h2 className='font-native text-7xl font-black text-indigo tracking-tight'>
                     {selectedWord.kannadaText}
                   </h2>
-                  <p className='text-3xl font-bold text-indigo/30 tracking-tight'>
+                  <p className='text-2xl font-technical font-bold text-indigo/30 tracking-tight lowercase'>
                     {selectedWord.transliteration}
                   </p>
                 </div>
@@ -322,15 +322,15 @@ export default function GardenPage() {
                     <p className='text-[10px] font-black text-indigo/20 uppercase tracking-widest mb-2'>
                       Hindi Translation
                     </p>
-                    <p className='text-xl font-black text-indigo'>
+                    <p className='text-xl font-mnemonic font-black text-indigo'>
                       {selectedWord.hindi}
                     </p>
                   </div>
                   <div className='rounded-[40px] bg-secondary p-8 border border-gold/10'>
-                    <p className='text-[10px] font-black text-indigo/20 uppercase tracking-widest mb-2'>
+                    <p className='text-[10px] font-black text-indigo/20 uppercase tracking-widest mb-2 font-ui'>
                       English Meaning
                     </p>
-                    <p className='text-xl font-black text-indigo'>
+                    <p className='text-xl font-mnemonic font-black text-indigo'>
                       {selectedWord.english}
                     </p>
                   </div>

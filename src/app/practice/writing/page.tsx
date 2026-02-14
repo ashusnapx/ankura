@@ -89,13 +89,13 @@ export default function ScriptExplorerPage() {
       <div className='container-responsive pt-12 pb-32'>
         <div className='flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12'>
           <div className='space-y-2'>
-            <div className='inline-flex items-center gap-2 px-3 py-1 rounded-full bg-terracotta/10 text-terracotta text-[10px] font-black uppercase tracking-widest'>
+            <div className='inline-flex items-center gap-2 px-3 py-1 rounded-full bg-terracotta/10 text-terracotta text-[10px] font-black uppercase tracking-widest font-ui'>
               <BookOpen size={12} /> Reference
             </div>
-            <h1 className='text-4xl font-black text-indigo tracking-tight'>
-              Script Explorer
+            <h1 className='text-4xl font-black text-indigo tracking-tight font-ui'>
+              Script <span className='text-terracotta'>Explorer</span>
             </h1>
-            <p className='text-lg font-medium text-indigo-light'>
+            <p className='text-lg font-medium text-indigo-light font-narrative'>
               Master the Warnamala in legendary trio format.
             </p>
           </div>
@@ -111,13 +111,13 @@ export default function ScriptExplorerPage() {
                 placeholder='Search phonetic or Hindi...'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className='w-full md:w-80 h-12 pl-12 pr-4 rounded-2xl bg-secondary border border-indigo/5 text-indigo font-bold focus:outline-none focus:ring-2 focus:ring-terracotta/20 transition-all'
+                className='w-full md:w-80 h-12 pl-12 pr-4 rounded-2xl bg-secondary border border-indigo/5 text-indigo font-bold focus:outline-none focus:ring-2 focus:ring-terracotta/20 transition-all font-ui'
               />
             </div>
             <div className='flex p-1 bg-secondary rounded-2xl border border-indigo/5'>
               <button
                 onClick={() => setActiveTab("vowels")}
-                className={`flex-1 px-6 py-2 rounded-xl text-xs font-black transition-all ${
+                className={`flex-1 px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all font-ui ${
                   activeTab === "vowels" ?
                     "bg-white text-indigo shadow-sm"
                   : "text-indigo/40 hover:text-indigo"
@@ -127,7 +127,7 @@ export default function ScriptExplorerPage() {
               </button>
               <button
                 onClick={() => setActiveTab("consonants")}
-                className={`flex-1 px-6 py-2 rounded-xl text-xs font-black transition-all ${
+                className={`flex-1 px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all font-ui ${
                   activeTab === "consonants" ?
                     "bg-white text-indigo shadow-sm"
                   : "text-indigo/40 hover:text-indigo"
@@ -153,7 +153,7 @@ export default function ScriptExplorerPage() {
                 <div className='absolute top-0 right-0 w-16 h-16 bg-gold/10 rounded-bl-[40px] transition-transform group-hover:scale-150 group-hover:bg-terracotta/5' />
 
                 <div className='w-full flex justify-between items-start mb-1'>
-                  <p className='text-[10px] font-black text-indigo/20 uppercase tracking-widest'>
+                  <p className='text-[10px] font-black text-indigo/20 uppercase tracking-widest font-technical'>
                     {item.en}
                   </p>
                   {isSpeechSynthesisSupported() && (
@@ -170,17 +170,17 @@ export default function ScriptExplorerPage() {
                 </div>
 
                 <div className='relative leading-none'>
-                  <span className='text-kannada text-7xl font-black text-indigo group-hover:text-terracotta transition-colors'>
+                  <span className='font-native text-7xl font-black text-indigo group-hover:text-terracotta transition-colors'>
                     {item.kn}
                   </span>
                 </div>
 
                 <div className='w-full pt-4 border-t border-indigo/5 flex items-center justify-center gap-3'>
-                  <div className='text-sm font-black text-indigo/40'>
+                  <div className='text-sm font-black text-indigo/40 font-narrative'>
                     {item.hi}
                   </div>
                   <div className='w-1 h-1 rounded-full bg-indigo/5' />
-                  <div className='text-[10px] font-black text-terracotta/40 uppercase tracking-tighter'>
+                  <div className='text-[10px] font-black text-terracotta/40 uppercase tracking-tighter font-technical'>
                     {activeTab === "vowels" ? "Swar" : "Vyanjan"}
                   </div>
                 </div>

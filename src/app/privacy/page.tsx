@@ -15,25 +15,25 @@ export default function PrivacyPage() {
           animate={{ opacity: 1, y: 0 }}
           className='max-w-3xl'
         >
-          <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo/5 border border-indigo/10 text-indigo/40 mb-8'>
+          <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo/5 border border-indigo/10 text-indigo/40 mb-8 font-technical'>
             <ShieldCheck size={14} />
             <span className='text-[10px] font-black uppercase tracking-widest'>
               Privacy First
             </span>
           </div>
 
-          <h1 className='text-6xl md:text-8xl font-black text-indigo tracking-tighter mb-8'>
+          <h1 className='text-6xl md:text-8xl font-black text-indigo tracking-tighter mb-8 font-ui'>
             Privacy <span className='text-terracotta'>Policy</span>
           </h1>
 
-          <p className='text-xl font-medium text-indigo/60 leading-relaxed mb-16'>
+          <p className='text-xl font-medium text-indigo/60 leading-relaxed mb-16 font-narrative'>
             At Ankura, your learning journey is personal. We believe in absolute
             transparency about how we handle your data.
           </p>
 
-          <div className='space-y-16'>
+          <div className='space-y-16 font-narrative'>
             <section className='space-y-6'>
-              <h2 className='text-3xl font-black text-indigo tracking-tight'>
+              <h2 className='text-3xl font-black text-indigo tracking-tight font-ui'>
                 1. Data Sovereignty
               </h2>
               <p className='text-lg text-indigo/60 leading-relaxed'>
@@ -46,7 +46,7 @@ export default function PrivacyPage() {
             </section>
 
             <section className='space-y-6'>
-              <h2 className='text-3xl font-black text-indigo tracking-tight'>
+              <h2 className='text-3xl font-black text-indigo tracking-tight font-ui'>
                 2. Voice Data
               </h2>
               <p className='text-lg text-indigo/60 leading-relaxed'>
@@ -58,7 +58,7 @@ export default function PrivacyPage() {
             </section>
 
             <section className='space-y-6'>
-              <h2 className='text-3xl font-black text-indigo tracking-tight'>
+              <h2 className='text-3xl font-black text-indigo tracking-tight font-ui'>
                 3. Analytics
               </h2>
               <p className='text-lg text-indigo/60 leading-relaxed'>
