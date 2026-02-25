@@ -28,6 +28,12 @@ const links = [
     isDropdown: true,
     sublinks: [
       {
+        href: "/practice/sentences",
+        label: "Vaakya",
+        icon: Sparkles,
+        desc: "Sentence Patterns",
+      },
+      {
         href: "/practice/bridge",
         label: "Bridge",
         icon: ArrowRight,
@@ -62,10 +68,12 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on path change
-  useEffect(() => {
+  // Close mobile menu on path change (state-based sync)
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     if (isMobileMenuOpen) setIsMobileMenuOpen(false);
-  }, [pathname, isMobileMenuOpen]);
+  }
 
   return (
     <nav

@@ -91,17 +91,13 @@ export default function HomePage() {
   const { current: streak } = useStreak();
   const { progress, completedMissionIds, isLoading } = useProgress();
   const [nextMission, setNextMission] = useState<Mission | null>(null);
-  const [greeting, setGreeting] = useState<{
-    en: string;
-    kn: string;
-    hi: string;
-  } | null>(null);
-
-  useEffect(() => {
-    // Pick a random greeting from the array on client mount
+  const [greeting] = useState(() => {
+    // Lazy initializer — runs once on mount, avoids hydration mismatch
+    // by returning null on server and picking random on client
+    if (typeof window === "undefined") return null;
     const randomIdx = Math.floor(Math.random() * GREETINGS.length);
-    setGreeting(GREETINGS[randomIdx]);
-  }, []);
+    return GREETINGS[randomIdx];
+  });
 
   useEffect(() => {
     const checkOnboarding = async () => {
@@ -294,6 +290,14 @@ export default function HomePage() {
 
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-8'>
                   {[
+                    {
+                      href: "/practice/sentences",
+                      icon: Sparkles,
+                      label: "Vaakya Engine",
+                      color: "#F4A261",
+                      desc: "Pattern Recognition",
+                      tag: "Syntax",
+                    },
                     {
                       href: "/practice/bridge",
                       icon: ArrowRight,

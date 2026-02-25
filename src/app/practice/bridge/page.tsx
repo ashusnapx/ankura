@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Zap, RotateCcw, Brain } from "lucide-react";
 import { BottomNav } from "@/components/shared/BottomNav";
 import { useBridgeProgress } from "@/hooks/useBridgeProgress";
-import { useAppStore } from "@/lib/store/useAppStore";
+import { useStats } from "@/hooks/useStats";
 import {
   BRIDGE_CATEGORIES,
   BRIDGE_WORDS,
@@ -13,7 +13,7 @@ import {
 
 export default function BridgePracticePage() {
   const { bridgeLevel, isLoading, getTestBatch, levelUp } = useBridgeProgress();
-  const { addXP } = useAppStore();
+  const { recordActivity } = useStats();
 
   const [activeCategory, setActiveCategory] = useState(BRIDGE_CATEGORIES[0].id);
   const [isTesting, setIsTesting] = useState(false);
@@ -322,7 +322,7 @@ export default function BridgePracticePage() {
                         <button
                           onClick={() => {
                             levelUp();
-                            addXP(500); // 500 XP for Level Up
+                            recordActivity("bridge", { xp: 500 }); // 500 XP for Level Up
                             setIsTesting(false);
                           }}
                           className='w-full bg-indigo text-white py-5 rounded-[24px] font-black text-lg shadow-xl shadow-indigo/20 hover:scale-105 transition-all'

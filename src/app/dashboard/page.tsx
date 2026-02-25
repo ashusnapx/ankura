@@ -1,6 +1,5 @@
 "use client";
-import { useMemo, useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import {
   Zap,
   Target,
@@ -16,129 +15,25 @@ import {
   Crown,
   MousePointer2,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import {
   Radar,
   RadarChart,
   PolarGrid,
   PolarAngleAxis,
-  PolarRadiusAxis,
   ResponsiveContainer,
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
 } from "recharts";
 import { BottomNav } from "@/components/shared/BottomNav";
-import { useStreak } from "@/hooks/useStreak";
-import { useProgress } from "@/hooks/useProgress";
-import { useBridgeProgress } from "@/hooks/useBridgeProgress";
-import { useAppStore } from "@/lib/store/useAppStore";
-import { ProgressRing } from "@/components/shared/ProgressRing";
-import { ALL_MISSIONS } from "@/lib/data/missions";
-import { BRIDGE_CATEGORIES, BRIDGE_WORDS } from "@/lib/data/bridge-vocab";
+import { useStats } from "@/hooks/useStats";
 
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } };
 
 export default function DashboardPage() {
-  const { current: streak, longest, history } = useStreak();
-  const {
-    progress,
-    completedMissionIds,
-    isLoading: progressLoading,
-  } = useProgress();
-  const {
-    bridgeLevel,
-    unlockedWordIds,
-    isLoading: bridgeLoading,
-  } = useBridgeProgress();
-  const { user, stats: appStats, updateStats } = useAppStore();
+  const { stats, isLoading: statsLoading } = useStats();
 
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const [mounted] = useState(() => typeof window !== "undefined");
 
-  const isLoading = progressLoading || bridgeLoading || !mounted;
-
-  // --- STATS CALCULATION ---
-  const stats = useMemo(() => {
-    const wordsLearned = progress?.wordsEncountered?.length || 0;
-    const totalMissionsWords = ALL_MISSIONS.reduce(
-      (acc, m) => acc + m.words.length,
-      0,
-    );
-    const missionsDone = completedMissionIds.length;
-    const totalMissions = ALL_MISSIONS.length;
-    const minutes = progress?.totalMinutesLearned || 0;
-    const bridgeWordsUnlocked = unlockedWordIds.length;
-
-    // Category Mastery
-    const categoryMastery = BRIDGE_CATEGORIES.map((cat) => {
-      const wordsInCat = BRIDGE_WORDS.filter((w) => w.category === cat.id);
-      const unlockedInCat = wordsInCat.filter((w) =>
-        unlockedWordIds.includes(w.id),
-      );
-      const percentage =
-        wordsInCat.length > 0 ?
-          Math.round((unlockedInCat.length / wordsInCat.length) * 100)
-        : 0;
-      return {
-        ...cat,
-        percentage,
-        count: unlockedInCat.length,
-        total: wordsInCat.length,
-      };
-    });
-
-    return {
-      wordsLearned,
-      totalMissionsWords,
-      missionsDone,
-      totalMissions,
-      minutes,
-      bridgeWordsUnlocked,
-      categoryMastery,
-    };
-  }, [progress, completedMissionIds, unlockedWordIds]);
-
-  // Sync with AppStore
-  useEffect(() => {
-    if (!isLoading) {
-      updateStats({
-        wordsMastered: stats.wordsLearned,
-        storiesCompleted: stats.missionsDone,
-        totalMinutes: stats.minutes,
-        streakCount: streak,
-        xp: user.xp,
-        level: user.level,
-      });
-    }
-  }, [isLoading, stats, streak, user.xp, user.level, updateStats]);
-
-  // Radar Data
-  const radarData = useMemo(() => {
-    const vocabScore = Math.min((stats.wordsLearned / 500) * 100, 100);
-    const storyScore = Math.min((stats.missionsDone / 20) * 100, 100);
-    const bridgeScore = Math.min((stats.bridgeWordsUnlocked / 100) * 100, 100);
-    const streakScore = Math.min((streak / 30) * 100, 100);
-    const consistency = Math.min((stats.minutes / 500) * 100, 100);
-
-    return [
-      { subject: "Vocab", A: vocabScore, fullMark: 100 },
-      { subject: "Stories", A: storyScore, fullMark: 100 },
-      { subject: "Bridge", A: bridgeScore, fullMark: 100 },
-      { subject: "Streak", A: streakScore, fullMark: 100 },
-      { subject: "Focus", A: consistency, fullMark: 100 },
-    ];
-  }, [stats, streak]);
-
-  // Activity Data
-  const activityData = useMemo(() => {
-    return history.slice(-7).map((h) => ({
-      day: new Date(h.date).toLocaleDateString("en-US", { weekday: "short" }),
-      completed: h.completed ? 1 : 0,
-    }));
-  }, [history]);
+  const isLoading = statsLoading || !mounted;
 
   if (isLoading) {
     return (
@@ -162,32 +57,32 @@ export default function DashboardPage() {
               <h1 className='text-4xl font-black text-white tracking-tight flex items-center gap-3 font-ui'>
                 Hello{" "}
                 <span className='text-gold font-narrative italic'>
-                  {user.name}
+                  {stats.userName}
                 </span>
                 <Crown className='text-gold' size={24} />
               </h1>
               <p className='text-white/40 text-sm font-black uppercase tracking-[0.2em] font-technical'>
-                Lvl {user.level} • {appStats.xp} XP Earned
+                Lvl {stats.level} • {stats.xp} XP Earned
               </p>
             </div>
             <div className='w-16 h-16 rounded-[24px] bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-4xl shadow-2xl'>
-              {user.avatar || "🧘"}
+              {stats.avatar || "🧘"}
             </div>
           </div>
 
           <div className='space-y-3'>
             <div className='flex justify-between items-end'>
               <span className='text-[10px] font-black text-white/40 uppercase tracking-[0.3em] font-ui'>
-                Level {user.level} Journey
+                Level {stats.level} Journey
               </span>
               <span className='text-xs font-black text-white font-technical'>
-                {user.xp % 1000} / 1000 XP
+                {stats.xp % 1000} / 1000 XP
               </span>
             </div>
             <div className='h-3 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm border border-white/5'>
               <motion.div
                 initial={{ width: 0 }}
-                animate={{ width: `${(user.xp % 1000) / 10}%` }}
+                animate={{ width: `${(stats.xp % 1000) / 10}%` }}
                 className='h-full bg-gradient-to-r from-terracotta to-gold rounded-full shadow-[0_0_20px_rgba(224,122,95,0.4)]'
               />
             </div>
@@ -207,7 +102,7 @@ export default function DashboardPage() {
             {[
               {
                 icon: <Flame size={20} />,
-                value: streak,
+                value: stats.streak,
                 label: "Day Streak",
                 color: "text-terracotta",
                 bg: "bg-terracotta/5",
@@ -257,6 +152,69 @@ export default function DashboardPage() {
             ))}
           </motion.div>
 
+          {/* Module Activity Grid */}
+          <motion.div variants={fadeUp}>
+            <div className='flex items-center gap-2 px-2 mb-4'>
+              <Layers size={16} className='text-indigo' />
+              <h3 className='text-sm font-black text-indigo uppercase tracking-widest font-ui'>
+                Module Activity
+              </h3>
+            </div>
+            <div className='grid grid-cols-2 gap-3'>
+              {[
+                {
+                  label: "Sentences",
+                  value: stats.sentencesCompleted,
+                  icon: <Sparkles size={16} />,
+                  color: "text-terracotta",
+                  bg: "bg-terracotta/5",
+                },
+                {
+                  label: "Bridge",
+                  value: stats.bridgeSessionsCompleted,
+                  icon: <BookOpen size={16} />,
+                  color: "text-indigo",
+                  bg: "bg-indigo/5",
+                },
+                {
+                  label: "Shadow",
+                  value: stats.shadowSessionsCompleted,
+                  icon: <Activity size={16} />,
+                  color: "text-green",
+                  bg: "bg-green/5",
+                },
+                {
+                  label: "Writing",
+                  value: stats.writingSessionsCompleted,
+                  icon: <Target size={16} />,
+                  color: "text-gold-dark",
+                  bg: "bg-gold/10",
+                },
+              ].map((mod, i) => (
+                <div
+                  key={i}
+                  className='bg-white p-5 rounded-[28px] border border-gold/20 shadow-sm'
+                >
+                  <div className='flex items-center gap-2 mb-3'>
+                    <div
+                      className={`w-8 h-8 rounded-xl ${mod.bg} ${mod.color} flex items-center justify-center`}
+                    >
+                      {mod.icon}
+                    </div>
+                    <span className='text-[10px] font-black text-indigo/30 uppercase tracking-widest font-ui'>
+                      {mod.label}
+                    </span>
+                  </div>
+                  <p
+                    className={`text-3xl font-black tracking-tighter font-technical ${mod.color}`}
+                  >
+                    {mod.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* Radar Visualization */}
           <motion.div
             variants={fadeUp}
@@ -280,7 +238,7 @@ export default function DashboardPage() {
                   cx='50%'
                   cy='50%'
                   outerRadius='80%'
-                  data={radarData}
+                  data={stats.radarData}
                 >
                   <PolarGrid stroke='#F2E9E1' strokeWidth={1} />
                   <PolarAngleAxis
@@ -299,7 +257,7 @@ export default function DashboardPage() {
             </div>
           </motion.div>
 
-          {/* AI Coach Insights (Redesigned) */}
+          {/* AI Coach Insights */}
           <motion.div variants={fadeUp} className='space-y-4'>
             <div className='flex items-center gap-2 px-2'>
               <Sparkles size={16} className='text-indigo' />
@@ -311,7 +269,7 @@ export default function DashboardPage() {
               {[
                 {
                   title: "Mastery Insight",
-                  text: `Your ${[...radarData].sort((a, b) => b.A - a.A)[0].subject} is elite. Focus on ${[...radarData].sort((a, b) => a.A - b.A)[0].subject} to balance your profile.`,
+                  text: `Your ${[...stats.radarData].sort((a, b) => b.A - a.A)[0].subject} is elite. Focus on ${[...stats.radarData].sort((a, b) => a.A - b.A)[0].subject} to balance your profile.`,
                   icon: <MousePointer2 className='text-white' size={16} />,
                   color: "bg-indigo",
                 },
@@ -348,7 +306,7 @@ export default function DashboardPage() {
             </div>
           </motion.div>
 
-          {/* Bridge Category Breakdown (Compact) */}
+          {/* Bridge Category Breakdown */}
           <motion.div
             variants={fadeUp}
             className='bg-white rounded-[44px] border border-gold/20 p-10 shadow-xl shadow-indigo/5 space-y-8'
@@ -359,7 +317,7 @@ export default function DashboardPage() {
                   Bridge Mastery
                 </h3>
                 <p className='text-[10px] font-bold text-indigo/30 uppercase tracking-widest font-ui'>
-                  Level {bridgeLevel} Progress
+                  Level {stats.bridgeLevel} Progress
                 </p>
               </div>
               <div className='bg-secondary px-4 py-2 rounded-full text-xs font-black text-indigo font-technical'>

@@ -42,7 +42,10 @@ const mono = Roboto_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ankura.app"),
-  title: "Ankura — Learn Kannada Through Stories",
+  title: {
+    default: "Ankura — Learn Kannada Through Stories",
+    template: "%s | Ankura",
+  },
   description:
     "A revolutionary story-driven Kannada learning app. Don't study Kannada — live inside Bangalore stories. Learn naturally through narrative immersion.",
   keywords: [
@@ -52,8 +55,30 @@ export const metadata: Metadata = {
     "Bangalore",
     "story-based learning",
     "Ankura",
+    "Kannada for beginners",
+    "learn Kannada online",
+    "Hindi to Kannada",
   ],
   authors: [{ name: "Ankura Team" }],
+  category: "Education",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
+  alternates: {
+    canonical: "https://ankura.app",
+  },
   openGraph: {
     title: "Ankura — Learn Kannada Through Stories",
     description:
@@ -106,6 +131,27 @@ export default function RootLayout({
         {/* Next.js 14+ handles links of type icon, apple-touch-icon etc from metadata automatically if they exist in public/ or are specified in metadata object. However, explicit links for preconnect/etc can remain if needed, but next/font handles optimization. */}
         <meta name='apple-mobile-web-app-capable' content='yes' />
         <meta name='apple-mobile-web-app-status-bar-style' content='default' />
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: "Ankura",
+              url: "https://ankura.app",
+              description:
+                "A revolutionary story-driven Kannada learning app. Learn Kannada through immersive Bangalore stories.",
+              applicationCategory: "EducationalApplication",
+              operatingSystem: "All",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "INR",
+              },
+              inLanguage: ["en", "kn", "hi"],
+            }),
+          }}
+        />
       </head>
       <body
         className={`${inter.variable} ${kannada.variable} ${story.variable} ${note.variable} ${mono.variable} antialiased font-sans bg-white text-indigo`}
